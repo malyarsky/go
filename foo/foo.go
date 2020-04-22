@@ -7,8 +7,8 @@ import (
 
 func main() {
 	f := func(r rune) rune {
-		return r + 2
+		return r + 1
 	}
 
-	fmt.Println(strings.Map(f, "ab"))
+	fmt.Println("Incremented runes of a string 'ab': ", strings.Map(f, "ab"))
 }

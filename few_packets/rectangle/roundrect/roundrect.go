@@ -1,6 +1,8 @@
-package main
+package roundrect
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // RoundRectangle defines graphical primitive for drawing rounded rectangles.
 type RoundRectangle struct {
