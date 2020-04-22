@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+//	"localhost/"
 )
 
 // Figure describes graphical primitive, which can Say
