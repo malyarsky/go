@@ -2,13 +2,34 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"time"
 )
 
-func main() {
-	f := func(r rune) rune {
-		return r + 1
+// TimeIn возвращает время в UTC, если name "" или "UTC".
+// Возвращает местное время, если name "Local".
+// В противном случае name принимается
+// за name местоположения в базе данных часового пояса IANA,
+// например, "Africa/Lagos".
+func TimeIn(t time.Time, name string) (time.Time, error) {
+	loc, err := time.LoadLocation(name)
+	if err == nil {
+		t = t.In(loc)
 	}
+	return t, err
+}
 
-	fmt.Println("Incremented runes of a string 'ab': ", strings.Map(f, "ab"))
+func main() {
+	for _, name := range []string{
+		"",
+		"Local",
+		"Asia/Shanghai",
+		"Europe/Moscow",
+	} {
+		t, err := TimeIn(time.Now(), name)
+		if err == nil {
+			fmt.Println(t.Location(), t.Format("15:04"))
+		} else {
+			fmt.Println(name, "<time unknown>")
+		}
+	}
 }
